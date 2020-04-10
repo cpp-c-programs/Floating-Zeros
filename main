@@ -1,0 +1,321 @@
+#include <iostream> 
+#include <conio.h> 
+#include <stdlib.h> 
+#include <stdio.h>
+#include <time.h> 
+using namespace std; 
+
+  bool gameOver, vittoria;
+  const int width = 40; 
+  const int height = 20;     
+  int x, y; 
+  char verso;
+  int ContClick;
+  char carattere;
+   int level=1;
+  struct enemy { int enemyX[20]; } zeri,zeri2,zeri3;
+
+void Draw() {     
+	    system("cls"); 
+	    carattere=201;
+	    cout << carattere;
+	    carattere=205;
+        for (int i = 1; i < width ; i++) 
+            cout << carattere;
+        carattere=187;
+        cout << carattere;
+        cout<<"\n";
+            
+        for (int i = 0; i < height; i++) { 
+            for (int j = 0; j < width; j++){
+            	   carattere=186;
+				if (j == 0 || j == width - 1)         
+                   cout << carattere; 
+				    			       
+                if (i == y && j == x){
+                	if(y<1){
+					vittoria=true;
+					gameOver=true;
+					}
+                	if(x<2)
+                	   x++;
+                	if(x>38)
+                	   x--; 
+					if(y>=19)
+                	   y--;        
+                    if(verso=='a')
+                       cout << "\b<";
+                    else
+                     	if(verso=='w')
+                     	cout << "\b^";
+                     	else
+                     	   if(verso=='d')
+                     	      cout << "\b>";
+                     	   else
+                     	       if(verso=='s')
+                     	          cout << "\bv";
+                     	          }
+             
+                    if((zeri.enemyX[i]==j&&(level==1||level==2||level==3))||(zeri2.enemyX[i]==j&&(level==2||level==3))||(zeri3.enemyX[i]==j&&level==3)){
+							if(i>ContClick)
+						       cout<<" ";
+						    else
+						       if((i == y || (i == y+1 && verso=='w') )&& j == x-1)
+						          gameOver = true; 
+						       else
+						           if(i==0){
+						           	carattere=176;
+						            cout<<carattere;
+								   }
+						           else{
+						           	 cout<<"0";
+								   }	  		             
+					 }
+					   
+					else   
+					if(i==0){
+					carattere=176;	
+					if(j<width-1)
+				       cout<<carattere;         
+	                  }
+	                  else
+                       cout << " ";          
+					
+				}     
+                     cout << endl;   
+			} 
+			carattere=200;
+			cout << carattere;
+			carattere=205;
+				for (int i = 1; i < width; i++)     
+                     cout << carattere;  
+				carattere =188;  
+				cout << carattere;    
+		} 
+			
+    void Input() {     
+        if (_kbhit()) {     
+        switch (_getch()){       
+   case 'a':           
+           x--; verso='a';  break;     
+   case 'd':           
+           x++; verso='d';  break;  
+   case 'w': 
+           y--; verso='w';  break;    
+   case 's':             
+           y++; verso='s';  break;         
+   case 'x':     
+          gameOver = true;  break;       
+   default: break;       
+    } 
+    for(int g=20; g>0; g--)
+    zeri.enemyX[g]=zeri.enemyX[g-1];
+    zeri.enemyX[0]=rand()%38+1;
+    for(int g=20; g>0; g--)
+    zeri2.enemyX[g]=zeri2.enemyX[g-1];
+    zeri2.enemyX[0]=rand()%38+1;
+    for(int g=20; g>0; g--)
+    zeri3.enemyX[g]=zeri3.enemyX[g-1];
+    zeri3.enemyX[0]=rand()%38+1;
+	ContClick++;
+	Draw();
+   } 
+  } 
+  
+  
+  
+     int main() { 
+     
+     srand(time(NULL));
+     system("color 0A");
+     x=18;
+     y=19;
+     ContClick=0;
+     
+      for(int i=0; i<20; i++){
+      	zeri.enemyX[i]=rand()%38+1;
+	  }
+	  for(int i=0; i<20; i++){
+      	zeri2.enemyX[i]=rand()%38+1;
+	  }
+	  for(int i=0; i<20; i++){
+      	zeri3.enemyX[i]=rand()%38+1;
+	  }
+	  
+	  carattere=201;
+	    cout << carattere;
+	    carattere=205;
+        for (int i = 1; i < width ; i++) 
+            cout << carattere;
+        carattere=187;
+        cout << carattere;
+            
+        cout<<"\n";
+                     
+	  for (int i = 0; i < (height/4)-1; i++) { 
+            for (int j = 0; j < width+1; j++){
+            	 carattere=186;
+				if (j == 0 || j == width)         
+                   cout<<carattere;                       
+				 else 
+				 if(i==0){	
+				 carattere=176;
+						cout<<carattere; 
+				}
+				else  
+                    cout << " "; 
+				}     
+                     cout << endl;   
+			} 
+			carattere=186;
+			cout<<carattere;
+			carattere=201;
+			cout<<"      ";
+			cout<<carattere;
+			carattere=205;
+			for(int u=0; u<24; u++)
+			    cout<<carattere;
+			carattere=187;
+			cout<<carattere;
+			cout<<"       ";
+			carattere=186; 
+			cout<<carattere<<endl;
+            cout<<carattere<<"      "<<carattere<<"You are now playing the "<<carattere<<"       "<<carattere<<endl; 
+			cout<<carattere<<"      "<<carattere<<" = FLOATING ZERO GAME = "<<carattere<<"       "<<carattere<<endl; 
+			cout<<carattere<<"  ";
+			carattere=201;
+			cout<<carattere;
+			carattere=205;
+			cout<<carattere<<carattere<<carattere;
+			carattere=202;
+			cout<<carattere;
+			carattere=205;
+			for(int u=0; u<24; u++)
+			    cout<<carattere;
+			carattere=202;
+			cout<<carattere;
+			carattere=205;
+			cout<<carattere<<carattere<<carattere<<carattere;
+			carattere=187;
+			cout<<carattere<<"  ";
+			carattere=186;
+			cout<<carattere<<"  "; 
+			cout<<endl;
+			cout<<carattere<<"  "<<carattere<<"    Reach ";
+			carattere=176;
+			cout<<carattere<<carattere<<carattere<<carattere<<carattere<<carattere<<carattere;
+			carattere=186;
+			cout<<" to win         "<<carattere<<"  "<<carattere<<endl;
+			cout<<carattere<<"  "<<carattere<<"    Press 'd' to move right      "<<carattere<<"  "<<carattere<<endl; 
+			cout<<carattere<<"  "<<carattere<<"    Press 'a' to move left       "<<carattere<<"  "<<carattere<<endl; 
+			cout<<carattere<<"  "<<carattere<<"    Press 'w' to move up         "<<carattere<<"  "<<carattere<<endl; 
+			cout<<carattere<<"  "<<carattere<<"    Press 's' to move down       "<<carattere<<"  "<<carattere<<endl; 
+			cout<<carattere<<"  "<<carattere<<"    Press 'x' anytime to stop    "<<carattere<<"  "<<carattere<<endl; 
+			cout<<carattere<<"  ";
+			carattere=200;
+			cout<<carattere;
+			carattere=205;
+			for(int u=0; u<33; u++)
+			cout<<carattere;
+			carattere=188;
+			cout<<carattere<<"  ";
+			carattere=186;
+			cout<<carattere<<"  "; 
+			cout<<endl;
+			
+	 for (int i = (height+7)/2; i < height-2; i++) { 
+            for (int j = 0; j < width; j++){
+            	 carattere=186;
+				if (j == 0 || j == width-1)         
+                   cout<<carattere<<" ";                     
+				 else   
+                    cout << " "; 
+				}     
+                     cout << endl;   
+			} 
+				
+	  carattere=200;
+			cout << carattere;
+			carattere=205;
+				for (int i = 1; i < width; i++)     
+                     cout << carattere;  
+				carattere =188;  
+				cout << carattere;         
+	
+	cout<<"\n Selezionare il livello, scrivendo un numero tra:\n -1 (easy)\n -2 (medium)\n -3 (hard)\n In caso di un iserimento errato sara' selezionata la modalita': 1"<<endl;
+	
+		fflush(stdin);
+		scanf("%d",&level);
+		fflush(stdin);
+	    if(level!=1&&level!=2&&level!=3){
+	    	level=1;
+	    	cout<<"Inserimento errato, il gioco sara' avviato al livello: 1\n";		
+			}
+	cout<<"Press any key to start the game...";
+	
+	
+	
+	
+	
+	
+	  while (!vittoria){ 
+	  system("color 0A");
+         while (!gameOver){          
+           Input(); 
+         }
+         
+         if(vittoria){
+         	system("cls");
+         	system("color 1F");
+			 cout<<" Y    Y    OOO    U     U "<<endl;
+			 cout<<"  Y  Y    O   O   U     U "<<endl;
+			 cout<<"   YY    O     O  U     U "<<endl;
+			 cout<<"   YY     O   O    U   U  "<<endl;
+			 cout<<"   YY      OOO      UUU   "<<endl;
+			 cout<<endl;
+			 cout<<"W       W   OOO    NN    N "<<endl;
+			 cout<<"W       W  O   O   N N   N "<<endl;
+			 cout<<"W   W   W O     O  N  N  N "<<endl;
+			 cout<<" W W W W   O   O   N   N N "<<endl;
+			 cout<<"  W   W     OOO    N    NN" <<endl;
+		 }
+		 else{
+		 	system("cls");
+		 	system("color 4F");
+		 	 cout<<"  Y    Y    OOO    U     U "<<endl;
+			 cout<<"   Y  Y    O   O   U     U "<<endl;
+			 cout<<"    YY    O     O  U     U "<<endl;
+			 cout<<"    YY     O   O    U   U  "<<endl;
+			 cout<<"    YY      OOO      UUU   "<<endl;
+			 cout<<endl;
+			 cout<<" L      OOO     SSS   TTTTT"<<endl;
+			 cout<<" L     O   O   S        T  "<<endl;
+			 cout<<" L    O     O   SSS     T  "<<endl;
+			 cout<<" L     O   O       S    T  "<<endl;
+			 cout<<" LLLLL  OOO     SSS     T  "<<endl;
+			 cout<<"\n Press R to restart the game"<<endl;
+			 cout<<"\n Press X to end the game\n"<<endl;
+			 char car;
+			 fflush(stdin);
+			 scanf("%c",&car);  
+			 fflush(stdin);   
+                switch (car){       
+                    case 'R': 
+					         gameOver=false; break;
+					case 'r': 
+					         gameOver=false; break; 
+					default : 
+					         vittoria=true;	break;	 
+			}				           
+		 }
+		 x=18;
+         y=19;
+         ContClick=0;
+         
+		 for(int i=0; i<20; i++){
+      	zeri.enemyX[i]=rand()%38+1;
+	      }
+		}
+		system("pause");
+         return 0; 
+      }
